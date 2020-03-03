@@ -6,7 +6,9 @@
     * [PC端React规范](standard/pc_react_specification.md)
     * [前后端分离开发约定](standard/fe_be_specification.md)
 * [**css**](css/README.md)
-    * [文本溢出截断省略](css/text_overflow.md)    
+    * [文本溢出截断省略](css/text_overflow.md)
+    * [css hover失效的几种情况](css/hover_fail.md)
+    * [display属性的应用](css/display_application.md)    
 * [**JavaScript**](javaScript/README.md)
     * [js执行机制](javaScript/perform_mode.md)
     * [js中的变量提升](javaScript/variable_object.md)
@@ -19,7 +21,6 @@
     * [关于setTimeout的使用](javaScript/setTimeout.md)
     * [js实现元素拖拽及缩放](javaScript/draggle_zoom.md) 
     * [js中的数值转换](javaScript/numerical.md)  
-
 * [**react**](react/README.md)
     * [React中关于使用key的意义和要点](react/react_key.md)
     * [react16新的周期函数](react/react16_newFunc.md) 
