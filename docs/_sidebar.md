@@ -32,6 +32,7 @@
     * [步骤（新手）指引](thirdTool/guide.md)
     * [前端导出pdf](thirdTool/export_pdf.md)   
 * [**最佳实践**](practice/README.md)
+    * [微信公众号开发](practice/wechat_page.md) 
     * [ajax下载文件](practice/ajax_download.md) 
     * [Antd validator 截流发送请求校验](practice/ant_validator_debounce.md)
     * [Antd 使用Modal进行数据条件、修改脏数据问题](practice/antd_modal.md)
