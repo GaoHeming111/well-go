@@ -35,6 +35,7 @@
     * [微信公众号开发](practice/wechat_page.md) 
     * [ajax下载文件](practice/ajax_download.md) 
     * [Antd validator 截流发送请求校验](practice/ant_validator_debounce.md)
+    * [Antd select远程搜索封装](practice/ant_select_tags.md)
     * [Antd 使用Modal进行数据条件、修改脏数据问题](practice/antd_modal.md)
     * [强制React组件刷新](practice/refresh_component.md)
     * [基础数据下拉封装](practice/select.md)
