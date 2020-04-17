@@ -42,6 +42,78 @@ if(window.location.search.includes('code')) {
 }
 ```
 
+### 关于下载链接
+处理pdf文件时，ios会直接预览，android则会默认去下载dpf，但是android下载的时候，微信内置浏览器基于
+安全策略不允许用户在微信浏览器里下载，所以需要引导用户去打开手机浏览器下载。
+
+**detail.html**
+```html
+<a onclick="handleJump('${it.contractLink}')">合同详情</a>
+```
+```js
+function handleJump(link) {
+    window.location.href = `guide.html?fileUrl=${link}`;
+}
+```
+
+**guide.html**
+
+<img src="../imgs/guide.jpg" alt="guide" width = "350">
+
+```js
+<style>
+    .guide {
+        width: 100vw;
+        height: 100vh;
+        background: #343434;
+        display: block;
+    }
+
+    .guide-img {
+        width: 100%;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="guide" id="guide">
+    <img src="images/guide.jpg" alt="guide" class="guide-img">
+</div>
+
+<script>
+    function GetRequest() {
+        const url = location.search; // 获取url中"?"符后的字符串
+        const theRequest = {};
+    
+        if (url.indexOf("?") !== -1) {
+            const str = url.substr(1);
+            const strs = str.split("&");  //字符串分割
+    
+            for (let i = 0; i < strs.length; i++) {
+                theRequest[strs[i].split("=")[0]] = (strs[i].split("=")[1]);
+            }
+        }
+    
+        return theRequest;
+    }
+    
+    //判断是否是微信浏览器
+    function is_weixin() {
+        const ua = window.navigator.userAgent.toLowerCase();
+        
+        return ua.match(/MicroMessenger/i) === 'micromessenger'; // 为true则代表是微信内置浏览器
+    }
+    
+    if (is_weixin()) {
+        // 是微信浏览器 （用户选择浏览器中打开）
+    } else {
+        //不是微信浏览器 执行下载
+        setTimeout(() => {
+            window.location.href = GetRequest().fileurl;
+        }, 500);
+    }
+</script>
+```
+
 ## 项目上线
 项目上线必须要认证公众号。主要是一些微信公众号后台的配置。
 
@@ -49,8 +121,6 @@ if(window.location.search.includes('code')) {
 2. 设置 => 安全中心 => ip白名单。白名单中配置后台服务器的ip地址，否则后台接口无法调用微信的接口。
 
 ## 开发中遇到的困难
-主要是不清楚流程，很坎坷～
-
 1. 关于授权：**前端能做的就是通过appid调用微信的接口，然后在redirect_uri指定的页面去截取url中的code，前端只管拿到code就可以了**，
     至于获取openId等操作，因为微信的安全策略，不允许暴露在前端，所以openId等一定是后端去获取的。
 
