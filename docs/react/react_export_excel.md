@@ -29,6 +29,8 @@ handleExport = () => {
 ## 后端导出
 后端返回的需要是一个文件流，前端解析文件流，写入excel。
 ```js
+import iconv from 'iconv-lite';
+
 handleExport = () => {
     this.props.ajax.get('/invitee/download', null, {
         successTip: '导出成功！',
@@ -39,9 +41,15 @@ handleExport = () => {
             const link = document.createElement('a');
             const fileName = res.headers['content-disposition'].split('=')[1];
             const blob = new Blob([res.data], {type: res.headers['content-type']});
+
+            // 最好加一层校验 不存在则停止下载 因为如果取不到fileName 一般是后台返回格式错误
+            if(!fileName) return openNotificationWithIcon('error', '导出失败～');
+
+            iconv.skipDecodeWarning = true; // 忽略警告
+            let name = iconv.decode(fileName, 'utf-8'); // 解决文件名中文乱码
         
             link.setAttribute('href', window.URL.createObjectURL(blob));
-            link.setAttribute('download', decodeURIComponent(fileName));
+            link.setAttribute('download', decodeURIComponent(name));
             link.style.visibility = 'hidden';
 
             document.body.appendChild(link);

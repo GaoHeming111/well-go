@@ -90,7 +90,7 @@ export default class index extends Component {
     };
 
     render() {
-        const {form, width, labelWidth, isRequired, handleFocus} = this.props;
+        const {form, width, labelWidth, isRequired, isFocus, isClear} = this.props;
         const {fetching, data, value} = this.state;
         const formProps = {
             form,
@@ -113,8 +113,11 @@ export default class index extends Component {
                     notFoundContent={fetching ? <Spin size="small"/> : null}
                     filterOption={false}
                     onSearch={this.fetchUser}
+                    
                     onChange={this.handleChange}
-                    onFocus={() => handleFocus && handleFocus(true)}
+                    onFocus={() => isFocus && isFocus()}
+                    clearIcon={<Icon type='close-circle' onClick={() => isClear && isClear()} />}
+
                     rules={[this.limitValueCount]}
                     options={data}
                     required={isRequired}
@@ -135,13 +138,20 @@ export default class PayManage extends Component {
     // 公司名称 子组件 传过来的值
     companyNo = '';
     handleShowValue = (value) => {
-        this.companyNo = (value.length && value[value.length - 1].key) || '';
+        this.companyNo = value || '';
     };
     
     render() {
-        // 主要考虑重置时将 this.companyNo 设置为空
+        // 主要考虑重置和点击allowClear时将 this.companyNo 设置为空
         return {
-            <CompanySearch width={280} labelWidth={70} showValue={this.handleShowValue} handleFocus={isFocus => isFocus && this.setState({isReset: false})} isReset={isReset}/>
+            <CompanySearch 
+                width={280} 
+                labelWidth={70} 
+                showValue={this.handleShowValue} 
+                isFocus={() => this.setState({isReset: false})}
+                isClear={() => this.companyNo = ''} 
+                isReset={isReset}
+            />
             
             <FormElement layout width="auto">
                 <Button type="primary" htmlType="submit">查询</Button>
