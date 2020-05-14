@@ -1,8 +1,8 @@
-![logo](imgs/logo.ico)
+<img src="imgs/well.png" alt="guide" width = "120">
 
 # WELL GO
 
-> 前端博客
+> 前端开发博客
 
 - 好吧 · 搞！
 
