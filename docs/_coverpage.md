@@ -1,6 +1,6 @@
 <img src="imgs/well.png" alt="guide" width = "120">
 
-# WELL GO
+## GO
 
 > 前端开发博客
 
